@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { Bot, webhookCallback } from "grammy";
 import { IncomingMessage, ServerResponse } from "http";
 
