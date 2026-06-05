@@ -4,6 +4,10 @@
     {
       "src": "src/index.ts",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/digest.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -14,6 +18,16 @@
     {
       "src": "/api/health",
       "dest": "src/index.ts"
+    },
+    {
+      "src": "/api/digest",
+      "dest": "api/digest.ts"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/digest",
+      "schedule": "0 9 * * *"
     }
   ]
 }
