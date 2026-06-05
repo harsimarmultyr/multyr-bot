@@ -4,24 +4,24 @@ import { isAdmin } from "../lib/admin";
 
 const DISCUSSION_PROMPTS = [
   {
-    question: "Which risk do you think is most underestimated in DeFi lending right now?",
+    question: "Which risk is most underestimated in DeFi lending right now?",
     options: ["Oracle manipulation", "Admin key risk", "Liquidity crunch", "Recursive leverage", "Stablecoin depeg"],
   },
   {
-    question: "What's your biggest concern with automated capital allocation protocols?",
-    options: ["Strategy rebalancing risk", "Smart contract bugs", "Yield dilution", "Governance attacks", "Regulatory pressure"],
+    question: "What is your biggest concern with automated capital allocation?",
+    options: ["Rebalancing risk", "Smart contract bugs", "Yield dilution", "Governance attacks", "Regulatory pressure"],
   },
   {
     question: "How do you think about utilization rates when deploying capital?",
-    options: ["Under 70% only", "Under 85% is fine", "Doesn't matter much", "I watch it actively", "Depends on the protocol"],
+    options: ["Under 70% only", "Under 85% is fine", "Doesn't matter much", "I watch it actively", "Depends on protocol"],
   },
   {
-    question: "Which DeFi primitive do you think is most mature on Arbitrum right now?",
-    options: ["Lending markets", "DEX liquidity", "Yield vaults", "Perps/derivatives", "None yet"],
+    question: "Which DeFi primitive is most mature on Arbitrum right now?",
+    options: ["Lending markets", "DEX liquidity", "Yield vaults", "Perps and derivatives", "None yet"],
   },
   {
     question: "What would make you trust a new yield vault with meaningful capital?",
-    options: ["Audit history", "TVL and track record", "Open-source code", "Team reputation", "Nothing — always small test first"],
+    options: ["Audit history", "TVL and track record", "Open-source code", "Team reputation", "Always small test first"],
   },
 ];
 
@@ -30,7 +30,7 @@ export async function handlePoll(ctx: CommandContext<Context>): Promise<void> {
   if (!from) return;
 
   if (!isAdmin(from.id)) {
-    await ctx.reply("⛔ This command is for admins only.");
+    await ctx.reply("This command is for admins only.");
     return;
   }
 
@@ -42,17 +42,15 @@ export async function handlePoll(ctx: CommandContext<Context>): Promise<void> {
     command: "/poll",
   });
 
-  // Pick a random prompt, or use custom if args provided
   const rawArgs = ctx.match?.trim() ?? "";
   let prompt = DISCUSSION_PROMPTS[Math.floor(Math.random() * DISCUSSION_PROMPTS.length)];
 
-  // If admin provides a custom question via args (format: "Question? | OptionA | OptionB | ...")
   if (rawArgs.includes("|")) {
     const parts = rawArgs.split("|").map((p) => p.trim());
     if (parts.length >= 3) {
       prompt = {
         question: parts[0],
-        options: parts.slice(1).slice(0, 10), // Telegram max 10 options
+        options: parts.slice(1).slice(0, 10),
       };
     }
   }
