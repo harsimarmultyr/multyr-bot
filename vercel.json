@@ -15,12 +15,5 @@
       "src": "/api/health",
       "dest": "src/index.ts"
     }
-  ],
-  "env": {
-    "TELEGRAM_BOT_TOKEN": "@telegram_bot_token",
-    "SUPABASE_URL": "@supabase_url",
-    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
-    "ADMIN_TELEGRAM_IDS": "@admin_telegram_ids",
-    "DUNE_API_KEY": "@dune_api_key"
-  }
+  ]
 }
